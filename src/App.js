@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Accordion from './components/Accordion';
-import { AccordionClass } from './components/AccordionClass';
 import Dropdown from './components/Dropdown';
+import Menu from './components/Menu';
+import Route from './components/Route';
 import { Search } from './components/Search';
+import Translate from './components/Translate';
 
 
 const items = [
@@ -32,7 +34,31 @@ const options = [
 ]
 
 export default () => {
-    const[selected,setSelected]=useState(options[0]);
+    const[selected, setSelected] = useState(options[0]);
+
+    return (
+        <div>
+            <Menu />
+            <Route path="/">
+                <Accordion items={items} />
+            </Route>
+            <Route path="/list">
+                <Search />
+            </Route>
+            <Route path="/dropdown">
+                <Dropdown options={options} selected={selected} onSelectedChange={setSelected} label="Select a Color" />
+            </Route>
+            <Route path="/translate">
+                <Translate />
+            </Route>
+        </div>
+    )
+}
+
+/*
+// Dropdown Widget
+
+const[selected,setSelected]=useState(options[0]);
     const[showDropDown, setShowDropDown]=useState(true);
 
     return (
@@ -48,5 +74,4 @@ export default () => {
             : null }
         </div>
     );
-}
-
+*/
